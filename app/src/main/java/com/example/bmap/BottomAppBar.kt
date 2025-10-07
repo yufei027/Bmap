@@ -27,7 +27,7 @@ fun BottomAppBar(
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-        NavigationBar {
+    NavigationBar {
         NavigationBarItem(
             selected = (currentRoute == Screen.MapScreen.route),
             onClick = {

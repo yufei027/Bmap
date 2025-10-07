@@ -22,12 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bmap">
 
-        <!-- 高德地图 API Key -->
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="7f3ce06ad2fe2c9419c34ef2c7a23153" />
-        <!-- 高德地图定位服务 -->
-        <service android:name="com.amap.api.location.APSService" />
 
         <activity
             android:name=".MainActivity"

@@ -67,9 +67,10 @@ dependencies {
 
 
 
-    implementation(libs.navi.xdmap.location.search)
+    //implementation(libs.navi.xdmap.location.search)
 
-
+    // If you're using compose also add the compose extension
+    implementation("com.mapbox.extension:maps-compose-ndk27:11.15.2")
     implementation("com.mapbox.maps:android-ndk27:11.15.2")
     // if your app does not require 16 KB page size support, the default dependency without -ndk27 can be used
     // implementation("com.mapbox.maps:android:11.15.2")

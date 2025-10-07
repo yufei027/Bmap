@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.bmap.feature.amap.MapScreen
 import com.example.bmap.feature.settings.DarkModeSettingScreen
 import com.example.bmap.feature.settings.SettingsScreen
 import com.example.bmap.ui.theme.DarkThemeMode
@@ -24,7 +23,6 @@ fun AppNavHost(
         modifier = Modifier
     ){
         composable(route = Screen.MapScreen.route){
-            MapScreen()
         }
         composable(route = Screen.SettingScreen.route) {
             SettingsScreen(

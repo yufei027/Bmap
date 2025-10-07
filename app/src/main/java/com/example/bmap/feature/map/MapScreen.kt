@@ -1,10 +1,8 @@
-package com.example.bmap.feature.custommap
-import com.example.bmap.R
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+package com.example.bmap.feature.map
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import com.example.bmap.R
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -12,13 +10,12 @@ import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,15 +23,60 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.bmap.BottomAppBar
+import com.mapbox.geojson.Point
+import com.mapbox.maps.extension.compose.MapEffect
+import com.mapbox.maps.extension.compose.MapboxMap
+import com.mapbox.maps.extension.compose.animation.viewport.rememberMapViewportState
+import com.mapbox.maps.plugin.PuckBearing
+import com.mapbox.maps.plugin.locationcomponent.createDefault2DPuck
+import com.mapbox.maps.plugin.locationcomponent.location
 
 @Composable
-fun CustomMapScreen(){
-    Column {
+// 记得传入navController
+fun MapScreen(navController: NavController){
+    Scaffold(
+        bottomBar = {
+            BottomAppBar(navController)
+        }
+    ) { innerPadding ->
+        Box(
+            // innerPadding 会自动避开底部栏区域
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            val mapViewportState = rememberMapViewportState()
+            MapboxMap(
+                Modifier.fillMaxSize(),
+                // 缩放级别为 2，美国为中心(-98.0, 39.5)，没有倾斜pitch和旋转bearing
+                mapViewportState = rememberMapViewportState {
+                    setCameraOptions {
+                        zoom(2.0)
+                        center(Point.fromLngLat(-98.0, 39.5))
+                        pitch(0.0)
+                        bearing(0.0)
+                    }
+                },
+            ){
+                MapEffect(Unit) { mapView ->
+                    // 设置地图上的带方向的 2D 小蓝点
+                    mapView.location.updateSettings {
+                        locationPuck = createDefault2DPuck(withBearing = true)
+                        enabled = true
+                        puckBearing = PuckBearing.COURSE
+                        puckBearingEnabled = true
+                        // pulsingEnabled = true
+                    }
+                    // 地图中心会自动移动到用户位置
+                    mapViewportState.transitionToFollowPuckState()
+                }
+            }
+        }
+
 
     }
-
 }
+
 
 @Composable
 fun FloatingSearchBar(){
@@ -85,6 +127,6 @@ fun FloatingSearchBar(){
     showSystemUi = true
 )
 @Composable
-fun CustomMapScreenPreview(){
+fun MapScreenPreview(){
 
 }
