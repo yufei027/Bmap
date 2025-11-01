@@ -1,15 +1,25 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+# Gradle files
+.gradle/
+build/
+gradle/wrapper/gradle-wrapper.jar
+
+# Local configuration
 local.properties
+.idea/
+
+# Kotlin
+*.kotlin_module
+.kotlin/
+
+# Android Studio
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Others
+.DS_Store
+*.iml
+
+# NDK
+obj/
+*.so

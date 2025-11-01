@@ -1,5 +1,6 @@
-package com.example.bmap
+package com.example.bmap.feature.components
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.rounded.Settings
@@ -10,14 +11,12 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.bmap.R
 import com.example.bmap.navigation.Screen
 
 @Composable
@@ -25,6 +24,7 @@ fun BottomAppBar(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
+    // 监听 NavController 当前栈顶的页面
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     NavigationBar {
@@ -33,7 +33,7 @@ fun BottomAppBar(
             onClick = {
                 navController.navigate(Screen.MapScreen.route) {
                     launchSingleTop = true // 如果顶部已经是这个页面，就不要重复显示
-                    restoreState = true // 记住离开时的页面位置，返回时回到这个位置
+                    restoreState = true // 返回时恢复页面状态（滚动位置等）
                 }
             },
             icon = {

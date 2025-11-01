@@ -8,4 +8,7 @@
     <string name="search">搜索</string>
     <string name="Serching_destination">搜索目的地或想去的地方</string>
     <string name="clear_input">清除输入内容</string>
+    <string name="return_to_previous_page">返回</string>
+    <string name="Darkmode">深色模式</string>
+    <string name="follow_system">跟随系统</string>
 </resources>
